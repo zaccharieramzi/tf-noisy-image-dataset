@@ -20,10 +20,11 @@ def test_init_and_iter(patch_size, noise_config):
         batch_size=1,
         patch_size=patch_size,
         noise_config=noise_config,
+        to_grey=True,
     )
     iterator = ds_builder.noisy_image_ds.as_numpy_iterator()
     model_inputs, model_outputs = next(iterator)
-    if noise_config['noise_input']:
+    if noise_config.get('noise_input', False):
         assert len(model_inputs) == 2
         model_inputs = model_inputs[0]
     assert model_inputs.shape == model_outputs.shape
