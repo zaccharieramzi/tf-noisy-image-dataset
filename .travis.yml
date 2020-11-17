@@ -1,8 +1,8 @@
 language: python
 cache: pip
 install:
-  - pip install pyxb pytest==5.0.0
+  - pip install pytest==5.0.0
   - pip install .
 
 script:
-  - pytest -s my_package/tests
+  - pytest -s tf_noisy_image_dataset/tests
