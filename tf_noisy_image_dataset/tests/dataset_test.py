@@ -16,7 +16,7 @@ PATCH_SIZE = 96
 def test_init_and_iter(patch_size, noise_config):
     ds_builder = NoisyDatasetBuilder(
         paths=data_path,
-        extension='jpg',
+        extension='png',
         batch_size=1,
         patch_size=patch_size,
         noise_config=noise_config,
