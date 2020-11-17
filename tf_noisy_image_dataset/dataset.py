@@ -44,12 +44,6 @@ class NoisyDatasetBuilder:
                 seed=0,
                 reshuffle_each_iteration=False,
             )
-        if self.extension == 'jpg':
-            self.decode_function = tf.image.decode_jpeg
-        elif self.extension == 'png':
-            self.decode_function = tf.image.decode_png
-        else:
-            raise NotImplementedError(f'{self.extension} is not a valid image extension')
         self.clean_image_ds = self.files_ds.map(
             self.process_clean_image,
             num_parallel_calls=tf.data.experimental.AUTOTUNE
@@ -84,9 +78,7 @@ class NoisyDatasetBuilder:
 
     def process_clean_image(self, filename):
         image_bytes = tf.io.read_file(filename)
-        image = self.decode_function(image_bytes)
-        if self.to_grey:
-            image = tf.image.rgb_to_grayscale(image)
+        image = tf.io.decode_image(image_bytes, channels=1 if self.to_grey else 3)
         # TODO: allow for different normalisations
         image = (image / 255) - 0.5
         if self.patch_size is not None:
