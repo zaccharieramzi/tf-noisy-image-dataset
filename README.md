@@ -1,5 +1,5 @@
-# My python package template
+# tf-noise-image-dataset
 
-[![Build Status](https://travis-ci.com/zaccharieramzi/my-python-package-template.svg?token=wHL4tmyGD3TP6bSo6Mdh&branch=master)](https://travis-ci.com/zaccharieramzi/my-python-package-template)
+[![Build Status](https://travis-ci.com/zaccharieramzi/tf-noisy-image-dataset.svg?branch=master)](https://travis-ci.com/zaccharieramzi/tf-noisy-image-dataset)
 
-With Readme, gitignore, travis, reqs and tree structure
+Noisy images dataset in TensorFlow made easy.
