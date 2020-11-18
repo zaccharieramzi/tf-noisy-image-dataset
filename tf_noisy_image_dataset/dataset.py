@@ -78,9 +78,11 @@ class NoisyDatasetBuilder:
 
     def process_clean_image(self, filename):
         image_bytes = tf.io.read_file(filename)
-        image = tf.io.decode_image(image_bytes, channels=1 if self.to_grey else 3)
+        n_channels = 1 if self.to_grey else 3
+        image = tf.io.decode_image(image_bytes, channels=n_channels)
         # TODO: allow for different normalisations
         image = (image / 255) - 0.5
+        image.set_shape([None, None, n_channels])
         if self.patch_size is not None:
             patch = tf.image.random_crop(
                 image,
