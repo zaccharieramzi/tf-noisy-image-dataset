@@ -29,7 +29,7 @@ def add_noise(image, noise_power_spec=30, fixed_noise=False, noise_input=False):
     # this is to allow quick change in case we want to change the network's
     # input/output
     if noise_input:
-        model_inputs = (image_noisy, noise_power)
+        model_inputs = (image_noisy, noise_power[:, None])
     else:
         model_inputs = image_noisy
     model_outputs = image
