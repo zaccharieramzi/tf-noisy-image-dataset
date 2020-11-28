@@ -13,11 +13,12 @@ PATCH_SIZE = 96
     {'fixed_noise': True},
     {'noise_input': True},
 ])
-def test_init_and_iter(patch_size, noise_config):
+@pytest.mark.parametrize('batch_size', [1, 2, 3])
+def test_init_and_iter(patch_size, noise_config, batch_size):
     ds_builder = NoisyDatasetBuilder(
         paths=data_path,
         extension='png',
-        batch_size=1,
+        batch_size=batch_size,
         patch_size=patch_size,
         noise_config=noise_config,
         to_grey=True,
