@@ -29,7 +29,7 @@ def test_init_and_iter(patch_size, noise_config, batch_size):
         assert len(model_inputs) == 2
         model_inputs = model_inputs[0]
     assert model_inputs.shape == model_outputs.shape
-    assert model_inputs.shape[0] == 1
+    assert model_inputs.shape[0] == batch_size
     assert model_inputs.shape[-1] == 1
     if patch_size is not None:
         assert model_inputs.shape[1] == PATCH_SIZE
