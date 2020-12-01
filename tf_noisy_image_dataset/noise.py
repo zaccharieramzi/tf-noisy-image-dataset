@@ -9,11 +9,29 @@ def draw_gaussian_noise_power(batch_size, noise_power_spec):
     )
     return noise_power
 
-def add_noise(image, noise_power_spec=30, fixed_noise=False, noise_input=False):
+def draw_uniform_noise_power(batch_size, noise_power_spec):
+    if isinstance(noise_power_spec, (float, int)):
+        noise_max = noise_power_spec
+        noise_min = 0
+    else:
+        noise_max = noise_power_spec[1]
+        noise_min = noise_power_spec[0]
+    noise_power = tf.random.uniform(
+        shape=(batch_size,),
+        minval=noise_min,
+        maxval=noise_max,
+    )
+    return noise_power
+
+def add_noise(image, noise_power_spec=30, fixed_noise=False, noise_input=False, noise_range_type='gaussian'):
     if fixed_noise:
         noise_power = tf.constant(noise_power_spec, dtype=image.dtype)[None]
     else:
-        noise_power = draw_gaussian_noise_power(
+        if noise_range_type == 'gaussian':
+            drawing_function = draw_gaussian_noise_power
+        elif noise_range_type == 'uniform':
+            drawing_function = draw_uniform_noise_power
+        noise_power = drawing_function(
             batch_size=tf.shape(image)[0],
             noise_power_spec=noise_power_spec,
         )
