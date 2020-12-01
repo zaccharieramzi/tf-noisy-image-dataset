@@ -9,7 +9,7 @@ with open('requirements.txt') as open_file:
 
 setuptools.setup(
     name="tf-noisy-image-dataset",
-    version="0.0.1",
+    version="0.0.2",
     author="Zaccharie Ramzi",
     author_email="zaccharie.ramzi@gmail.com",
     description="Datasets for noisy images in the tf.data API.",
