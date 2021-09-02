@@ -7,9 +7,10 @@ with open("README.md", "r") as fh:
 with open('requirements.txt') as open_file:
     install_requires = open_file.read()
 
+__version__ = "develop"
 setuptools.setup(
     name="tf-noisy-image-dataset",
-    version="0.0.2",
+    version=__version__,
     author="Zaccharie Ramzi",
     author_email="zaccharie.ramzi@gmail.com",
     description="Datasets for noisy images in the tf.data API.",
