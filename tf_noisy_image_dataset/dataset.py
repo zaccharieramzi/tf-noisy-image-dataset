@@ -12,6 +12,7 @@ class NoisyDatasetBuilder:
             extension='jpg',
             n_samples=None,
             shuffle=False,
+            seed=0,
             to_grey=False,
             patch_size=None,
             batch_size=32,
@@ -27,6 +28,7 @@ class NoisyDatasetBuilder:
         self.extension = extension
         self.n_samples = n_samples
         self.shuffle = shuffle
+        self.seed = seed
         self.to_grey = to_grey
         self.batch_size = batch_size
         self.patch_size = patch_size
@@ -37,11 +39,11 @@ class NoisyDatasetBuilder:
         self.prefetch = prefetch
         self._get_files_ds()
         if self.n_samples is not None:
-            self.file_ds = self.file_ds.take(n_samples)
+            self.files_ds = self.files_ds.take(n_samples)
         if self.shuffle:
-            self.file_ds = self.file_ds.shuffle(
+            self.files_ds = self.files_ds.shuffle(
                 800,
-                seed=0,
+                seed=self.seed,
                 reshuffle_each_iteration=False,
             )
         self.clean_image_ds = self.files_ds.map(
